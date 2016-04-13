@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     //Reead the antibiotic data
     $.ajax({
-        url: "/data.csv",
+        url: "data.csv",
         async: false,
         dataType: "text",   
         success: function (csvd) {
