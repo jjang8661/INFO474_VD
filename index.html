@@ -8,15 +8,63 @@
     <!-- Includes plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <link rel="stylesheet" href="./css/main.css">
+    <!-- Includes jQuery and jQuery UI--> 
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
+    <!-- Includes jQuery.csv.js for reading csv data -->
+    <script src="jquery.csv.js"></script>
+
+    <link rel="stylesheet" href="./css/main.css">
 
 </head>
 <body>
+    <p id = myName> Spring 2016| INFO 474 | Woosuk Seo</p>
+
     <header>
-        <h1> Visualization Design
+        <h1>Visualization Design</h1>
     </header>
-    <div id="graph"></div>
+
+    <div id="container">
+        <h2>INTRO</h2>
+        <div class="rationale">
+            <img src="../res/data_capture.png" alt="image of data set">
+            <p id="intro">The minimum inhibitory concentration (MIC) represents the minimum concentration of antibiotic required to prevent growth in vitro. It is often used for measuring the effectiveness of an antibiotic. This website provides three visualization for the MIC of three most popular antibiotics dataset which is shown on the left. Each visualization is designed to answer a targeted question. In addition to different types of visualization, there are short explanations for justifying why the paticular graph is appropriate to answer the certain targeted question. </p>
+        </div> <!-- Close Intro -->
+
+        <h2>GRAPH 1</h2>
+        <div id="bargraph" class="graph"></div>
+        <div class="rationale">
+            <b>Targeted Question: "Which antibiotic has the lowest MIC for each Gram-negative bacteria?"</b><br>
+            <br>
+            Assume there is an antibiotic researcher who wants to know which antibiotic of the three is the most effective for each Gram-negative bacteria. In this case, a grouped bar graph is useful since it is easier to compare the sub-categories (3 types of antibiotics) wihtin each main categories (Gram-negative bacteria). By aligning the bars on the same axis, the researcher can easily see the difference between each antibiotic MIC value for the bacteria.<br>
+            <br>
+            In order to increase the expressiveness of the graph, the range of MIC(y-axis) is reduced to 10. The original range of MIC on the data expands from 0.001 to 870, but this interval is too big to clearly express the lowest value. Since the question focuses on the lowest value, the values for too high MIC are not that necessary. In addition, most of the data do not exceed 10. With the reduced range, it is easier to determine which antibiotic has the lowest MIC value. For exmaple, most of MIC values for Penicilin are very hign, so the reasercher can notice that it would not have the lowest MIC value for most of the Gram-negative bacteria. Therefore, this graph can answer the targeted question for finding the antibiotic which has the lowest MIC value for each Gram-negative bacteria.
+        </div> <!-- Close Graph 1 rationale -->
+
+        <h2>GRAPH 2</h2>
+        <div id="scatterplot" class="graph"></div>
+        <div class="rationale">
+            <b>Targeted Question: "Is there any realationship between MIC values of Streptomycin and Neomycin?"</b><br>
+            <br>
+            Now, the researcher comes with another question. The researcher wants to know if there is a relationship between MIC values of Streptomycin and Neomycin, since their values seem to be closer than the other value (Penicilin). In order to find a pattern or a relationship, the reaseracher exmanies the scatter plot. A scatter plot is useful to represent the correlation between two variables. The positions of the dots shows the trend of the graph which represent the relationship between the variables. In addition, the position judgment along the same scale, which people are likely to perform intuitively when they see the scatter plot, is the most accurate elementary perceptual task <a href="https://canvas.uw.edu/courses/1041401/files/35704122/download?wrap=1">(Cleveland and McGill,1984)</a>.<br>
+            <br>
+            In this case, the reasercher can presume that there might be no noticeable relationship between Streptomycin and Neomycin. Since the dots are located at arbitary positions, the researcher could not conclude any pattern or trend from the graph. In order to increase expressiveness, the graph has reduced range and domain of the graph, excluding the outliers. Before adjucsting the range and domain, many dots overlap each other so that it is hard to interpret the graph. Although it is easier to interpret the graph with smaller data, it is hard to conclude the general relationship between the MIC values for two antibiotics due of insufficient data. Nevertheless, this graph can answer the targeted question by representing that there are no noticeabler relationship between the two antibiotics for this limited dataset. 
+        </div> <!-- Close Graph 2 rationale -->
+
+        <h2>GRAPH 3</h2>
+        <div id="piegraph" class="graph"></div>
+        <div class="rationale">
+            <b>Targeted Question: "What is the order of overall effectiveness for the three antibiotics?"</b><br>
+            <br>
+            Lastly, the researcher wants to know the overall effectiveness of the three antibiotics for the dataset. Since the lower MIC value represents the higher effectivenss, it can be measured by counting the number of bacteria for which each antibiotic has the lowest MIC value. In order to express this data, a pie chart is an appropriate method to use. By showing the proportion of each antibiotic, the graph clearly represents the proportion of MIC values for each antibiotic, which indicates the effectiveness of the antibiotics. According to the graph, Neomycin is the most effective antibiotic for the tested 16 bacteria; Penicilin is the second and Streptomycin is the least effective. For the Graph 1, the researcher could use the grouped bar graph to compare the MIC values for each individual bacteria. On the other hand, this pie chart provides overall conclusion within the dataset, including all 16 bacteria. Thus, this pie chart can help the researcher to order the three antibiotics based on their effectiveness for all 16 bacteria data.<br>
+            <br>
+            <p>* <b>NOTE:</b> For "Proteus vulgaris", Streptomycin and Neomycin have the same lowest MIC value. The algorithm to find the lowest value recognizes Streptomycin as the one has the lowest value. Therefore, I increased a count for the Neomycinincreased, while increasing the total number of bacteria types by one. In other words, the proportion is calculated by the count of each antibiotic over 17 bacteria</p>
+        </div> <!-- Close Graph 3 rationale -->
+
+    </div> <!-- Close container div -->
+
+    <!-- When the page is loaded, run main.js -->
     <script src="./js/main.js"></script>
 </body>
 </html>
